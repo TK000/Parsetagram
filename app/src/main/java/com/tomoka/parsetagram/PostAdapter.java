@@ -1,15 +1,20 @@
 package com.tomoka.parsetagram;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.parse.ParseException;
 import com.parse.ParseImageView;
+import com.tomoka.parsetagram.model.DetailsActivity;
 import com.tomoka.parsetagram.model.Post;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -62,7 +67,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     // create ViewHolder class
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 //        @BindView(R.id.ivProfileImage) public ImageView ivProfileImage;
 //        @BindView(R.id.tvUserName) public TextView tvUsername;
@@ -75,6 +80,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public TextView tvBody;
         public TextView tvUsername;
         public ParseImageView ivProfileImage;
+        public RelativeLayout rLayout;
 
 
         public ViewHolder(View itemView) {
@@ -85,43 +91,33 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             tvUsername = (TextView) itemView.findViewById(R.id.tvUserName);
             ivProfileImage = (ParseImageView) itemView.findViewById(R.id.ivProfileImage);
+            rLayout = (RelativeLayout) itemView.findViewById(R.id.rLayout);
 
-            //rLayout.setOnClickListener(this);
+            rLayout.setOnClickListener(this);
             //ivReply.setOnClickListener(this);
         }
 
 
-//        // when the user clicks on a row, show MovieDetailsActivity for the selected movie
-//        @Override
-//        public void onClick(View v) {
-//            // gets item position
-//            int position = getAdapterPosition();
-//            // make sure the position is valid, i.e. actually exists in the view
-//            if (position != RecyclerView.NO_POSITION) {
-//                // get the movie at the position, this won't work if the class is static
-//                Tweet tweet = mTweets.get(position);
-//                // create intent for the new activity
-//                if (v == ivReply) {
-//                    Intent intent = new Intent(context, ReplyActivity.class);
-//                    // serialize the movie using parceler, use its short name as a key
-//                    intent.putExtra("tweet", Parcels.wrap(tweet));
-//                    //intent.putExtra(placeholder, config.getImageUrl(config.getBackdropSize(), movie.getBackdropPath()));
-//                    // show the activity
-//                    context.startActivity(intent);
-//                    //Log.i("onclick", "tvImage clicked");
-//                }
-//                else {
-//                    Intent intent = new Intent(context, TweetDetailActivity.class);
-//                    // serialize the movie using parceler, use its short name as a key
-//                    intent.putExtra("tweet", Parcels.wrap(tweet));
-//                    //intent.putExtra(placeholder, config.getImageUrl(config.getBackdropSize(), movie.getBackdropPath()));
-//                    // show the activity
-//                    context.startActivity(intent);
-//                }
-//            }
-//
-//        }
-    }
+        // when the user clicks on a row, show MovieDetailsActivity for the selected movie
+        @Override
+        public void onClick(View v) {
+            // gets item position
+            int position = getAdapterPosition();
+            // make sure the position is valid, i.e. actually exists in the view
+            if (position != RecyclerView.NO_POSITION) {
+                // get the movie at the position, this won't work if the class is static
+                Post post = mPosts.get(position);
+                // create intent for the new activity
+                Intent intent = new Intent(context, DetailsActivity.class);
+                // serialize the movie using parceler, use its short name as a key
+                intent.putExtra("post", Parcels.wrap(post));
+                //intent.putExtra(placeholder, config.getImageUrl(config.getBackdropSize(), movie.getBackdropPath()));
+                // show the activity
+                context.startActivity(intent);
+                }
+            }
+
+        }
 
 
     // Clean all elements of the recycler

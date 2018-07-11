@@ -16,10 +16,9 @@ import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
+import com.tomoka.parsetagram.model.DescriptionActivity;
 import com.tomoka.parsetagram.model.Post;
 
 import java.io.File;
@@ -126,22 +125,22 @@ public class TimelineActivity extends AppCompatActivity {
         rvposts.setAdapter(postAdapter);
         populateTimeline();
 
-//        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
-//        // Setup refresh listener which triggers new data loading
-//        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                // Your code to refresh the list here.
-//                // Make sure you call swipeContainer.setRefreshing(false)
-//                // once the network request has completed successfully.
-//                fetchTimelineAsync(0);
-//            }
-//        });
-//        // Configure the refreshing colors
-//        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-//                android.R.color.holo_green_light,
-//                android.R.color.holo_orange_light,
-//                android.R.color.holo_red_light);
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                fetchTimelineAsync(0);
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
     }
 
@@ -173,39 +172,38 @@ public class TimelineActivity extends AppCompatActivity {
         });
     }
 
-//    public void fetchTimelineAsync(int page) {
-//        // Send the network request to fetch the updated data
-//        // `client` here is an instance of Android Async HTTP
-//        // getHomeTimeline is an example endpoint.
-//        client.getHomeTimeline(new JsonHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-//                //Log.d("TwitterClient", response.toString());
-//                // iterate through the JSON array
-//                // for each entry, deserialize the JSON object
-//                tweetAdapter.clear();
-//                for (int i = 0; i < response.length(); i++) {
-//                    // convert each object to a Tweet model
-//                    // add that Tweet model to our data source
-//                    // notify the adapter that we've added an item
-//                    try {
-//                        Tweet tweet = Tweet.fromJSON(response.getJSONObject(i));
-//                        tweets.add(tweet);
-//                        tweetAdapter.notifyItemInserted(tweets.size() - 1);
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                swipeContainer.setRefreshing(false);
-//            }
-//
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-//                Log.d("TwitterClient", responseString);
-//                throwable.printStackTrace();
-//            }
-//        });
-//    }
+    public void fetchTimelineAsync(int page) {
+        // Send the network request to fetch the updated data
+        // `client` here is an instance of Android Async HTTP
+        // getHomeTimeline is an example endpoint.
+        postAdapter.clear();
+        // Define the class we would like to query
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        // Define our query conditions
+        query.whereEqualTo("user", ParseUser.getCurrentUser());
+        // Execute the find asynchronously
+        query.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> itemList, ParseException e) {
+                if (e == null) {
+                    // Access the array of results here
+                    for (int i = itemList.size()-1; i >= 0; i--) {
+                        // convert each object to a Tweet model
+                        // add that Tweet model to our data source
+                        // notify the adapter that we've added an item
+                        Post post = itemList.get(i);
+                        posts.add(post);
+                        postAdapter.notifyItemInserted(posts.size() - 1);
+                    }
+                    swipeContainer.setRefreshing(false);
+                    //String firstItemId = itemList.get(0).getObjectId();
+                    //Toast.makeText(TimelineActivity.this, firstItemId, Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d("item", "Error: " + e.getMessage());
+                }
+            }
+        });
+    }
 
 
     public void onCamera(View v) {
@@ -256,32 +254,15 @@ public class TimelineActivity extends AppCompatActivity {
                 // Load the taken image into a preview
                 //ImageView ivPreview = (ImageView) findViewById(R.id.ivPreview);
                 //ivPreview.setImageBitmap(takenImage);
-                final ParseFile parsefile = new ParseFile(photoFile);
-                createPost("blah", parsefile, ParseUser.getCurrentUser());
-                
+                //final ParseFile parsefile = new ParseFile(photoFile);
+                //Post post = createPost("blah", parsefile, ParseUser.getCurrentUser());
+                Intent i = new Intent(TimelineActivity.this, DescriptionActivity.class);
+                i.putExtra("photofile", photoFile.getAbsolutePath());
+                startActivity(i);
             } else { // Result was a failure
                 Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    private void createPost(String description, ParseFile imageFile, ParseUser user) {
-        final Post newPost = new Post();
-        newPost.setDescription(description);
-        newPost.setImage(imageFile);
-        newPost.setUser(user);
-
-        newPost.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    Log.d("HomeActivity", "Create post success");
-                } else {
-                    Log.e("HomeActivity", "Create post failed");
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
 }

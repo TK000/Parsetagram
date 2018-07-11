@@ -11,6 +11,7 @@ public class Post extends ParseObject {
     private static final String KEY_DESCRIPTION = "description";
     private static final String KEY_IMAGE = "image";
     private static final String KEY_USER = "user";
+    private static final String KEY_OBJECTID = "objectId";
 
     public String getDescription() {
         return getString(KEY_DESCRIPTION);
@@ -22,6 +23,10 @@ public class Post extends ParseObject {
 
     public ParseFile getImage() {
         return getParseFile(KEY_IMAGE);
+    }
+
+    public String getObjectId() {
+        return getString(KEY_OBJECTID);
     }
 
     public void setImage(ParseFile image) {
@@ -50,13 +55,5 @@ public class Post extends ParseObject {
             include("user");
             return this;
         }
-    }
-
-    public ParseFile getMedia() {
-        return getParseFile("media");
-    }
-
-    public void setMedia(ParseFile parseFile) {
-        put("media", parseFile);
     }
 }

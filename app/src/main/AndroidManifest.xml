@@ -35,7 +35,9 @@
                 android:resource="@xml/fileprovider" />
         </provider>
 
-        <activity android:name=".TimelineActivity"></activity>
+        <activity android:name=".TimelineActivity" />
+        <activity android:name=".model.DescriptionActivity" />
+        <activity android:name=".model.DetailsActivity"></activity>
     </application>
 
 </manifest>
