@@ -101,14 +101,14 @@ public class HomeActivity extends AppCompatActivity {
         postQuery.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> objects, ParseException e) {
-                if (e == null) {
-                    for (int i = 0; i < objects.size(); i++) {
-                        Log.d("HomeActivity", "Post[" + i + "] = " + objects.get(i).getDescription()
-                        + "\nusername = " + objects.get(i).getUser().getUsername());
-                    }
-                } else {
-                    e.printStackTrace();
-                }
+                //if (e == null) {
+                    //for (int i = 0; i < objects.size(); i++) {
+                        //Log.d("HomeActivity", "Post[" + i + "] = " + objects.get(i).getDescription()
+                        //+ "\nusername = " + objects.get(i).getUser().getUsername());
+                    //}
+                //} else {
+                    //e.printStackTrace();
+                //}
             }
         });
     }

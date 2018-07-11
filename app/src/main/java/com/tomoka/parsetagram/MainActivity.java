@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
-            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+            Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
             startActivity(intent);
             finish();
         }
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("LoginActivity", "Login Successful");
                     ParseUser currentUser = ParseUser.getCurrentUser();
 
-                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
                     startActivity(intent);
                     finish();
                 } else {
