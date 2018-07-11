@@ -62,4 +62,9 @@
         android:layout_marginStart="13dp"
         android:layout_marginTop="19dp"
         app:srcCompat="@android:color/black" />
+
+    <com.parse.ParseImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"/>
 </RelativeLayout>

@@ -51,4 +51,12 @@ public class Post extends ParseObject {
             return this;
         }
     }
+
+    public ParseFile getMedia() {
+        return getParseFile("media");
+    }
+
+    public void setMedia(ParseFile parseFile) {
+        put("media", parseFile);
+    }
 }
