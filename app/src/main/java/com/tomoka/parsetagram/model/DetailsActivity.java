@@ -2,10 +2,10 @@ package com.tomoka.parsetagram.model;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.ParseException;
+import com.parse.ParseImageView;
 import com.tomoka.parsetagram.R;
 
 import org.parceler.Parcels;
@@ -14,7 +14,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     TextView tvdUser;
     TextView tvdBody;
-    ImageView ivdProfile;
+    ParseImageView ivdProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +30,8 @@ public class DetailsActivity extends AppCompatActivity {
         try {
             tvdUser.setText(String.format("%s", post.getUser().fetchIfNeeded().getUsername()));
             tvdBody.setText(post.getDescription());
-            //ivdProfile.setParseFile(post.getImage());
-            //ivdProfile.loadInBackground();
+            ivdProfile.setParseFile(post.getImage());
+            ivdProfile.loadInBackground();
         } catch (ParseException e) {
             e.printStackTrace();
         }
