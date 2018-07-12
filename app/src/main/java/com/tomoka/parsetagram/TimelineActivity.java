@@ -125,7 +125,7 @@ public class TimelineActivity extends AppCompatActivity {
                 if (e == null) {
                     // Access the array of results here
                     showProgressBar();
-                    for (int i = Math.min(itemList.size()-1,20); i >= 0; i--) {
+                    for (int i = itemList.size()-1; i >= Math.max(0,itemList.size()-20); i--) {
                         // convert each object to a Tweet model
                         // add that Tweet model to our data source
                         // notify the adapter that we've added an item
@@ -158,7 +158,7 @@ public class TimelineActivity extends AppCompatActivity {
             public void done(List<Post> itemList, ParseException e) {
                 if (e == null) {
                     // Access the array of results here
-                    for (int i = Math.min(itemList.size()-1,20); i >= 0; i--) {
+                    for (int i = itemList.size()-1; i >= Math.max(0,itemList.size()-20); i--) {
                         // convert each object to a Tweet model
                         // add that Tweet model to our data source
                         // notify the adapter that we've added an item

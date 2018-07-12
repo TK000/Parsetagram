@@ -35,4 +35,12 @@
         android:text="Camera"
         tools:layout_editor_absoluteX="296dp"
         tools:layout_editor_absoluteY="463dp" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/menu_bottom_navigation" />
+
 </android.support.constraint.ConstraintLayout>
