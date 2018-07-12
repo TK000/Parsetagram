@@ -1,27 +1,8 @@
 package com.tomoka.parsetagram;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseUser;
-import com.parse.SaveCallback;
-import com.tomoka.parsetagram.model.Post;
-
-import java.io.File;
-import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -30,7 +11,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button create_btn;
     private Button refresh_btn;
 
-    public final String APP_TAG = "MyCustomApp";
+    /*public final String APP_TAG = "MyCustomApp";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public String photoFileName = "photo.jpg";
     File photoFile;
@@ -40,7 +21,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        description_et = findViewById(R.id.description_et);
+        //description_et = findViewById(R.id.description_et);
         create_btn = findViewById(R.id.create_btn);
         refresh_btn = findViewById(R.id.refresh_btn);
 
@@ -169,5 +150,5 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
     }
-
+*/
 }

@@ -6,65 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-    <EditText
-        android:id="@+id/description_et"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="172dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Description" />
-
-    <Button
-        android:id="@+id/create_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="115dp"
-        android:text="Create" />
-
-    <Button
-        android:id="@+id/refresh_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="59dp"
-        android:text="Refresh" />
-
     <Button
         android:id="@+id/logout_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="173dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:text="Log out"
-        android:onClick="onLogout"/>
+        android:layout_centerInParent="true"
+        android:onClick="onLogout"
+        android:text="Log out" />
 
-    <Button
-        android:id="@+id/camera_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="onCamera"
-        android:text="Camera" />
-
-    <ImageView
-        android:id="@+id/ivPreview"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="19dp"
-        app:srcCompat="@android:color/black" />
-
-    <com.parse.ParseImageView
-        android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"/>
 </RelativeLayout>
