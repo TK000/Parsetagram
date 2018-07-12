@@ -1,33 +1,12 @@
 package com.tomoka.parsetagram;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
-import com.tomoka.parsetagram.model.DescriptionActivity;
 import com.tomoka.parsetagram.model.Post;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 public class TimelineActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeContainer;
@@ -36,7 +15,7 @@ public class TimelineActivity extends AppCompatActivity {
     public ArrayList<Post> posts;
     public RecyclerView rvposts;
 
-    public final String APP_TAG = "MyCustomApp";
+    /*public final String APP_TAG = "MyCustomApp";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public String photoFileName = "photo.jpg";
     File photoFile;
@@ -234,7 +213,7 @@ public class TimelineActivity extends AppCompatActivity {
                 Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
         }
-    }
+    }*/
 
 }
 
