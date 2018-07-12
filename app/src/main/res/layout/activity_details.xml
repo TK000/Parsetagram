@@ -7,61 +7,34 @@
 
     <TextView
         android:id="@+id/tvdUser"
-        android:layout_width="186dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="53dp"
+        android:layout_alignStart="@+id/tvdBody"
+        android:layout_below="@+id/ivdProfile"
+        android:layout_marginStart="-64dp"
         android:text="TextView"
         tools:layout_editor_absoluteX="3dp"
         tools:layout_editor_absoluteY="4dp" />
 
     <TextView
         android:id="@+id/tvdBody"
-        android:layout_width="331dp"
+        android:layout_width="257dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvdUser"
-        android:layout_marginStart="53dp"
+        android:layout_above="@+id/ivdProfile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-37dp"
         android:autoLink="all"
         android:linksClickable="true"
+        android:gravity="center_horizontal"
         android:text="TextView" />
 
-    <TextView
-        android:id="@+id/tvdCreatedAt"
-        android:layout_width="145dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/tvdUser"
-        android:gravity="right"
-        android:text="TextView" />
 
     <com.parse.ParseImageView
         android:id="@+id/ivdProfile"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp"
         app:srcCompat="@android:color/black" />
-
-
-    <ImageView
-        android:id="@+id/ivMedia"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvdBody"
-        android:layout_alignLeft="@+id/ivdProfile"
-        android:layout_marginStart="57dp"
-        app:srcCompat="@android:color/black" />
-
-    <ImageView
-        android:id="@+id/btnFav"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/ivMedia"
-        android:layout_marginStart="100dp"
-        android:onClick="onFav"
-        android:text="Favorite" />
 </RelativeLayout>

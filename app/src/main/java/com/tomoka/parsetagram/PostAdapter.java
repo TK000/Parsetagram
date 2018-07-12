@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.parse.ParseException;
 import com.parse.ParseImageView;
 import com.tomoka.parsetagram.model.DetailsActivity;
 import com.tomoka.parsetagram.model.Post;
@@ -45,14 +44,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         Post post = mPosts.get(position);
 
         // populate the views according to this data
-        try {
-            holder.tvUsername.setText(String.format("%s", post.getUser().fetchIfNeeded().getUsername()));
-            holder.tvBody.setText(post.getDescription());
-            holder.ivProfileImage.setParseFile(post.getImage());
-            holder.ivProfileImage.loadInBackground();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
+        //holder.tvUsername.setText(String.format("%s", post.getUser().fetchIfNeeded().getUsername()));
+        holder.tvBody.setText(post.getDescription());
+        holder.ivProfileImage.setParseFile(post.getImage());
+        holder.ivProfileImage.loadInBackground();
+
         //Log.i("TAG", String.format("%s", post.getMedia().getUrl()));
         //holder.tvTimestamp.setText(tweet.createdAt);
 
@@ -78,7 +75,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 //        @BindView(R.id.ivReply) public ImageView ivReply;
 
         public TextView tvBody;
-        public TextView tvUsername;
+        //public TextView tvUsername;
         public ParseImageView ivProfileImage;
         public RelativeLayout rLayout;
 
@@ -89,7 +86,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             // perform findViewById lookups
             //ButterKnife.bind(this, itemView);
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
-            tvUsername = (TextView) itemView.findViewById(R.id.tvUserName);
+            //tvUsername = (TextView) itemView.findViewById(R.id.tvUserName);
             ivProfileImage = (ParseImageView) itemView.findViewById(R.id.ivProfileImage);
             rLayout = (RelativeLayout) itemView.findViewById(R.id.rLayout);
 

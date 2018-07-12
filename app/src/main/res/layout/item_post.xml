@@ -10,64 +10,29 @@
         android:id="@+id/rLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:orientation="vertical">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true">
 
         <com.parse.ParseImageView
             android:id="@+id/ivProfileImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            app:srcCompat="@android:color/black" />
-
-        <TextView
-            android:id="@+id/tvUserName"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/tvBody"
-            android:text="TextView" />
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@android:color/black" />
 
         <TextView
             android:id="@+id/tvBody"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvUserName"
-            android:layout_marginLeft="5dp"
-            android:layout_toEndOf="@+id/ivProfileImage"
-            android:autoLink="all"
-            android:linksClickable="true"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/tvTimestamp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:text="TextView" />
-
-        <ImageView
-            android:id="@+id/tvImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/ivProfileImage"
-            android:layout_below="@+id/tvBody"
-            android:layout_marginLeft="56dp"
-            android:layout_marginStart="0dp"
-            app:srcCompat="@android:color/black" />
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/ivProfileImage"
+            android:gravity="center_horizontal"
+            android:text="TextView"
+            android:layout_alignParentLeft="true" />
 
     </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/ivReply"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/rLayout"
-        android:layout_marginStart="71dp"
-        android:layout_marginTop="-5dp"
-        app:srcCompat="@android:drawable/ic_menu_directions" />
 
 </RelativeLayout>
