@@ -2,53 +2,86 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:background="@drawable/pinkpurplegradient"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/username_et"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="73dp"
-        android:layout_marginTop="77dp"
-        android:ems="10"
-        android:hint="Username"
-        android:inputType="textPersonName"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="73dp" />
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:cropToPadding="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/instagramtext" />
+    </LinearLayout>
 
     <EditText
         android:id="@+id/password_et"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/username_et"
-        android:layout_below="@+id/username_et"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="214dp"
         android:ems="10"
         android:hint="Password"
+        android:textColorHint="#D0D0D0"
         android:inputType="textPassword"
-        android:layout_alignLeft="@+id/username_et" />
+        android:background="#1FD0D0D0"/>
+
+    <EditText
+        android:id="@+id/username_et"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="162dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:textColorHint="#D0D0D0"
+        android:background="#1FD0D0D0"/>
 
     <Button
         android:id="@+id/login_btn"
-        android:layout_width="wrap_content"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="133dp"
-        android:layout_marginTop="211dp"
-        android:text="Login"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="133dp" />
+        android:layout_below="@+id/password_et"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/border"
+        android:text="Log In"
+        android:textColor="#D0D0D0" />
 
-    <Button
+
+    <TextView
         android:id="@+id/signup_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/login_btn"
-        android:layout_below="@+id/login_btn"
-        android:text="Sign up" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="#1FD0D0D0"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="Don't have an account? Sign up."
+        android:textColor="#D3D3D3"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_alignParentLeft="true" />
 
 </RelativeLayout>

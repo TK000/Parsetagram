@@ -6,12 +6,16 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -40,72 +44,37 @@ public class TimelineActivity extends AppCompatActivity {
     //public static long max_id;
 
     // Instance of the progress action-view
-    //MenuItem miActionProgressItem;
+    MenuItem miActionProgressItem;
 
-//    @Override
-//    public boolean onPrepareOptionsMenu(Menu menu) {
-//        // Store instance of the menu item containing progress
-//        miActionProgressItem = menu.findItem(R.id.miActionProgress);
-//        // Extract the action-view from the menu item
-//        ProgressBar v =  (ProgressBar) MenuItemCompat.getActionView(miActionProgressItem);
-//        // Return to finish
-//        return super.onPrepareOptionsMenu(menu);
-//    }
-//
-//    public void showProgressBar() {
-//        // Show progress item
-//        miActionProgressItem.setVisible(true);
-//    }
-//
-//    public void hideProgressBar() {
-//        // Hide progress item
-//        miActionProgressItem.setVisible(false);
-//    }
-//
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle presses on the action bar items
-//        switch (item.getItemId()) {
-//            case R.id.imTweet:
-//                composeMessage();
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
-//
-//    private final int REQUEST_CODE = 20;
-//    //private final int REPLY_REQUEST_CODE = 30;
-//
-//    public void composeMessage() {
-//        Intent intent = new Intent(this, ComposeActivity.class);
-//        //intent.putExtra("name", Parcels.wrap(user));
-//        this.startActivityForResult(intent, REQUEST_CODE);
-//    }
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // Store instance of the menu item containing progress
+        miActionProgressItem = menu.findItem(R.id.miActionProgress);
+        // Extract the action-view from the menu item
+        ProgressBar v =  (ProgressBar) MenuItemCompat.getActionView(miActionProgressItem);
+        // Return to finish
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    public void showProgressBar() {
+        // Show progress item
+        miActionProgressItem.setVisible(true);
+    }
+
+    public void hideProgressBar() {
+        // Hide progress item
+        miActionProgressItem.setVisible(false);
+    }
 //
 //
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        // REQUEST_CODE is defined above
-//        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-//            // Extract name value from result extras
-//            Tweet tweet = Parcels.unwrap(data.getParcelableExtra("name"));
-//            int code = data.getExtras().getInt("code", 0);
-//            // Toast the name to display temporarily on screen
-//            //Toast.makeText(this, tweet.body, Toast.LENGTH_SHORT).show();
-//            tweets.add(0, tweet);
-//            tweetAdapter.notifyItemInserted(0);
-//            rvTweets.scrollToPosition(0);
-//        }
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+//
+
 
 
     @Override
@@ -155,6 +124,7 @@ public class TimelineActivity extends AppCompatActivity {
             public void done(List<Post> itemList, ParseException e) {
                 if (e == null) {
                     // Access the array of results here
+                    showProgressBar();
                     for (int i = Math.min(itemList.size()-1,20); i >= 0; i--) {
                         // convert each object to a Tweet model
                         // add that Tweet model to our data source
@@ -163,6 +133,7 @@ public class TimelineActivity extends AppCompatActivity {
                         posts.add(post);
                         postAdapter.notifyItemInserted(posts.size() - 1);
                     }
+                    hideProgressBar();
                     //String firstItemId = itemList.get(0).getObjectId();
                     //Toast.makeText(TimelineActivity.this, firstItemId, Toast.LENGTH_SHORT).show();
                 } else {

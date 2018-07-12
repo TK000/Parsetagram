@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText username_et;
     private EditText password_et;
     private Button login_btn;
-    private Button signup_btn;
+    private TextView signup_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
