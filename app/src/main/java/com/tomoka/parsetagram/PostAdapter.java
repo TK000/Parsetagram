@@ -108,6 +108,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 Intent intent = new Intent(context, DetailsActivity.class);
                 // serialize the movie using parceler, use its short name as a key
                 intent.putExtra("post", Parcels.wrap(post));
+                //intent.putExtra("pos", position);
                 //intent.putExtra(placeholder, config.getImageUrl(config.getBackdropSize(), movie.getBackdropPath()));
                 // show the activity
                 context.startActivity(intent);
