@@ -21,6 +21,7 @@ import java.util.List;
 
 public class TimelineFragment extends Fragment {
     private SwipeRefreshLayout swipeContainer;
+    private EndlessRecyclerViewScrollListener scrollListener;
 
     public PostAdapter postAdapter;
     public ArrayList<Post> posts;
@@ -45,7 +46,8 @@ public class TimelineFragment extends Fragment {
         // construct the adapter from this datasource
         postAdapter = new PostAdapter(posts);
         // RecyclerView setup (layout manager, use adapter)
-        rvposts.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        rvposts.setLayoutManager(linearLayoutManager);
         // set the adapter
         rvposts.setAdapter(postAdapter);
         populateTimeline();
@@ -66,9 +68,52 @@ public class TimelineFragment extends Fragment {
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+
+        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+                loadNextDataFromApi(page);
+            }
+        };
+        // Adds the scroll listener to RecyclerView
+        rvposts.addOnScrollListener(scrollListener);
+
     }
 
-
+    public void loadNextDataFromApi(int offset) {
+        // Define the class we would like to query
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        // Define our query conditions
+        query.whereEqualTo("user", ParseUser.getCurrentUser());
+        final int pos = offset*20;
+        // Execute the find asynchronously
+        query.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> itemList, ParseException e) {
+                if (e == null) {
+                    // Access the array of results here
+                    ((fragmentholder)getActivity()).showProgressBar();
+                    if (itemList.size()-pos-1 > 0){
+                        for (int i = itemList.size()-pos-1; i >= Math.max(0,itemList.size()-20-pos); i--) {
+                            // convert each object to a Tweet model
+                            // add that Tweet model to our data source
+                            // notify the adapter that we've added an item
+                            Post post = itemList.get(i);
+                            posts.add(post);
+                            postAdapter.notifyItemInserted(posts.size() - 1);
+                        }
+                    }
+                    ((fragmentholder)getActivity()).hideProgressBar();
+                    //String firstItemId = itemList.get(0).getObjectId();
+                    //Toast.makeText(TimelineActivity.this, firstItemId, Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d("item", "Error: " + e.getMessage());
+                }
+            }
+        });
+    }
 
     private void populateTimeline() {
         // Define the class we would like to query
