@@ -25,6 +25,8 @@ public class DescriptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         text_et = findViewById(R.id.text_et);
         //finish();
     }

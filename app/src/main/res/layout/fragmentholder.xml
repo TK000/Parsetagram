@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/action_bar_transparent_background"
         app:menu="@menu/menu_bottom_navigation" />
 
 </LinearLayout>

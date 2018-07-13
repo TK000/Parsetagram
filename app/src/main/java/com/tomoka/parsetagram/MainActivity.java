@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
             Intent intent = new Intent(MainActivity.this, fragmentholder.class);

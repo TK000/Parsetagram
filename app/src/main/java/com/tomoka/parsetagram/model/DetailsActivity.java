@@ -2,6 +2,7 @@ package com.tomoka.parsetagram.model;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.ParseException;
@@ -26,6 +27,7 @@ public class DetailsActivity extends AppCompatActivity {
     TextView comment1;
     TextView comment2;
     TextView comment3;
+    ImageView fav_iv;
 
     Post post;
     //public PostAdapter postAdapter;
@@ -35,6 +37,8 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         tvdUser = findViewById(R.id.tvdUser);
         tvdBody = findViewById(R.id.tvdBody);
         ivdProfile = findViewById(R.id.ivdProfile);
@@ -43,6 +47,7 @@ public class DetailsActivity extends AppCompatActivity {
         comment1 = findViewById(R.id.comment1);
         comment2 = findViewById(R.id.comment2);
         comment3 = findViewById(R.id.comment3);
+        fav_iv = findViewById(R.id.fav_iv);
 
         post = Parcels.unwrap(getIntent().getParcelableExtra("post"));
         //final int pos = getIntent().getIntExtra("pos",-1);
@@ -59,6 +64,8 @@ public class DetailsActivity extends AppCompatActivity {
 
             if (post.getFavcount() > 0) {
                 favcount_tv.setText(String.format("%s",post.getFavcount()));
+                fav_iv.setImageDrawable(getDrawable(R.drawable.ufi_heart_active));
+
             }
             else {
                 favcount_tv.setText(String.format("%s",0));

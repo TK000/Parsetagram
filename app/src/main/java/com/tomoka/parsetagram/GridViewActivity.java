@@ -26,6 +26,8 @@ public class GridViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid_view);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         // find the RecyclerView
         rvposts = (RecyclerView) findViewById(R.id.rvposts);
         // init the arraylist (data source)

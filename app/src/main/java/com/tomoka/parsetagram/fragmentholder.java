@@ -49,6 +49,9 @@ public class fragmentholder extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragmentholder);
+        
+
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final Fragment fragment1 = new TimelineFragment();

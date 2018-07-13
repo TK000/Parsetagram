@@ -12,6 +12,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:text="TextView"
+        android:textColor="@color/blue_6"
         tools:layout_editor_absoluteX="3dp"
         tools:layout_editor_absoluteY="4dp" />
 
@@ -43,7 +44,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tvdBody"
         android:layout_marginStart="122dp"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        app:srcCompat="@drawable/ufi_heart" />
 
     <TextView
         android:id="@+id/favcount_tv"
@@ -59,6 +60,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:gravity="right"
+        android:textColor="@color/black_30_transparent"
         android:text="TextView" />
 
     <TextView
