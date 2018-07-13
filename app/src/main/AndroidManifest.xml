@@ -38,7 +38,8 @@
 
         <activity android:name=".TimelineActivity" />
         <activity android:name=".model.DescriptionActivity" />
-        <activity android:name=".model.DetailsActivity"></activity>
+        <activity android:name=".model.DetailsActivity" />
+        <activity android:name=".GridViewActivity"></activity>
     </application>
 
 </manifest>

@@ -3,12 +3,14 @@ package com.tomoka.parsetagram;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.parse.ParseException;
 import com.parse.ParseImageView;
 import com.tomoka.parsetagram.model.DetailsActivity;
 import com.tomoka.parsetagram.model.Post;
@@ -49,6 +51,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.tvBody.setText(post.getDescription());
         holder.ivProfileImage.setParseFile(post.getImage());
         holder.ivProfileImage.loadInBackground();
+        try {
+            holder.propic_iv.setParseFile(post.getUser().fetchIfNeeded().getParseFile("profilepicture"));
+            holder.propic_iv.loadInBackground();
+            Log.d("PROPIC", "SUCCESS!");
+        } catch (ParseException e) {
+            Log.e("PROPIC", "FAIL");
+            e.printStackTrace();
+        }
 
         //Log.i("TAG", String.format("%s", post.getMedia().getUrl()));
         //holder.tvTimestamp.setText(tweet.createdAt);
@@ -78,6 +88,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         //public TextView tvUsername;
         public ParseImageView ivProfileImage;
         public RelativeLayout rLayout;
+        public ParseImageView propic_iv;
 
 
         public ViewHolder(View itemView) {
@@ -89,6 +100,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             //tvUsername = (TextView) itemView.findViewById(R.id.tvUserName);
             ivProfileImage = (ParseImageView) itemView.findViewById(R.id.ivProfileImage);
             rLayout = (RelativeLayout) itemView.findViewById(R.id.rLayout);
+            propic_iv = (ParseImageView) itemView.findViewById(R.id.propic_iv);
 
             rLayout.setOnClickListener(this);
             //ivReply.setOnClickListener(this);

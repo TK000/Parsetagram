@@ -12,8 +12,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:orientation="vertical"
-        android:layout_alignParentLeft="true">
+        android:orientation="vertical">
+
+        <com.parse.ParseImageView
+            android:id="@+id/propic_iv"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:srcCompat="@drawable/ic_launcher_background" />
 
         <com.parse.ParseImageView
             android:id="@+id/ivProfileImage"
@@ -27,11 +34,11 @@
             android:id="@+id/tvBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/ivProfileImage"
             android:gravity="center_horizontal"
-            android:text="TextView"
-            android:layout_alignParentLeft="true" />
+            android:text="TextView" />
 
     </RelativeLayout>
 
