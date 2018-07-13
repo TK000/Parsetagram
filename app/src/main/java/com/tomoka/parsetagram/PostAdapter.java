@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseImageView;
+import com.parse.SaveCallback;
 import com.tomoka.parsetagram.model.DetailsActivity;
 import com.tomoka.parsetagram.model.Post;
 
@@ -143,7 +144,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         @Override
         public void onClick(View v) {
             // gets item position
-            int position = getAdapterPosition();
+            final int position = getAdapterPosition();
             // make sure the position is valid, i.e. actually exists in the view
             if (position != RecyclerView.NO_POSITION) {
                 // get the movie at the position, this won't work if the class is static
@@ -178,9 +179,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             String newcomment = input.getText().toString();
                             JSONArray commentsarray = post.getJSONArray("comments");
+                            if (commentsarray == null) {
+                                commentsarray = new JSONArray();
+                            }
                             commentsarray.put(newcomment);
                             post.put("comments",commentsarray);
-                            post.saveInBackground();
+                            post.saveInBackground(new SaveCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    notifyItemChanged(position);
+                                }
+                            });
                             // Do something with value!
                         }
                     });

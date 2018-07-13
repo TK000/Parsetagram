@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/tvdUser"
@@ -60,4 +60,29 @@
         android:layout_alignParentTop="true"
         android:gravity="right"
         android:text="TextView" />
+
+    <TextView
+        android:id="@+id/comment2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/comment1"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/comment3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/comment2"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/comment1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/fav_iv"
+        android:text="TextView" />
+
 </RelativeLayout>

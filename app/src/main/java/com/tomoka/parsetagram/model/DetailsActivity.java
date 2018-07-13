@@ -9,6 +9,8 @@ import com.parse.ParseImageView;
 import com.tomoka.parsetagram.R;
 import com.tomoka.parsetagram.TimeFormatter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.parceler.Parcels;
 
 import java.text.Format;
@@ -21,6 +23,9 @@ public class DetailsActivity extends AppCompatActivity {
     ParseImageView ivdProfile;
     TextView favcount_tv;
     TextView tv_timestamp;
+    TextView comment1;
+    TextView comment2;
+    TextView comment3;
 
     Post post;
     //public PostAdapter postAdapter;
@@ -35,6 +40,9 @@ public class DetailsActivity extends AppCompatActivity {
         ivdProfile = findViewById(R.id.ivdProfile);
         favcount_tv = findViewById(R.id.favcount_tv);
         tv_timestamp = findViewById(R.id.tv_timestamp);
+        comment1 = findViewById(R.id.comment1);
+        comment2 = findViewById(R.id.comment2);
+        comment3 = findViewById(R.id.comment3);
 
         post = Parcels.unwrap(getIntent().getParcelableExtra("post"));
         //final int pos = getIntent().getIntExtra("pos",-1);
@@ -59,5 +67,29 @@ public class DetailsActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        JSONArray commentsarray = post.getJSONArray("comments");
+        if (commentsarray != null && commentsarray.length() > 0) {
+            try {
+                comment1.setText(commentsarray.get(0).toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if (commentsarray.length() > 1) {
+                try {
+                    comment2.setText(commentsarray.get(1).toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (commentsarray.length() > 2) {
+                    try {
+                        comment3.setText(commentsarray.get(2).toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
     }
 }
