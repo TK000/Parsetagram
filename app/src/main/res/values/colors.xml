@@ -37,7 +37,7 @@
     <color name="blue_5_20_transparent">#333897f0</color>
     <color name="blue_5_30_transparent">#4d3897f0</color>
     <color name="blue_5_70_transparent">#b33897f0</color>
-    <color name="blue_6">#ff1372cc</color>
+    <color name="blue_6">#1372cc</color>
     <color name="blue_7">#ff0053a4</color>
     <color name="blue_8">#ff003569</color>
     <color name="blue_9">#ff00264a</color>
@@ -243,7 +243,7 @@
     <color name="result_bar_active_color">#ff4999da</color>
     <color name="share_screen_icon_color">#ff4a5158</color>
     <color name="slider_gradient_background">@color/grey_2</color>
-    <color name="slider_gradient_end">#fff50000</color>
+    <color name="slider_gradient_end">#f50000</color>
     <color name="slider_gradient_start">#ffb900b4</color>
     <color name="slider_sticker_background">@color/white</color>
     <color name="slider_sticker_question_hint">@color/grey_3</color>

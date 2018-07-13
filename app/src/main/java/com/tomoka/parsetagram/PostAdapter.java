@@ -68,6 +68,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         if (context instanceof fragmentholder) {
             try {
                 holder.tvBody.setText(post.getDescription());
+                //holder.propic_iv.setPlaceholder(setImageResource(R.drawable.placeholder));
                 holder.propic_iv.setParseFile(post.getUser().fetchIfNeeded().getParseFile("profilepicture"));
                 holder.propic_iv.loadInBackground();
                 Format formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy");

@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center_vertical">
     <item
         android:id="@+id/action_favorites"
         android:enabled="true"
         android:icon="@drawable/instagram_home_outline_24"
+        android:layout_gravity="center_vertical"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_schedules"
         android:enabled="true"
         android:icon="@drawable/instagram_new_post_outline_24"
+        android:layout_gravity="center_vertical"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_music"
         android:enabled="true"
         android:icon="@drawable/instagram_user_outline_24"
+        android:layout_gravity="center_vertical"
         app:showAsAction="ifRoom" />
 </menu>

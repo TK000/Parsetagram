@@ -29,6 +29,8 @@ public class DetailsActivity extends AppCompatActivity {
     TextView comment2;
     TextView comment3;
     ImageView fav_iv;
+    ParseImageView propic_iv;
+    TextView textView;
 
     Post post;
     //public PostAdapter postAdapter;
@@ -51,6 +53,8 @@ public class DetailsActivity extends AppCompatActivity {
         comment2 = findViewById(R.id.comment2);
         comment3 = findViewById(R.id.comment3);
         fav_iv = findViewById(R.id.fav_iv);
+        propic_iv = findViewById(R.id.propic_iv);
+        textView = findViewById(R.id.textView);
 
         post = Parcels.unwrap(getIntent().getParcelableExtra("post"));
         //final int pos = getIntent().getIntExtra("pos",-1);
@@ -64,6 +68,8 @@ public class DetailsActivity extends AppCompatActivity {
             String dateString = formatter.format(post.getCreatedAt());
             String formattedTime = TimeFormatter.getTimeDifference(dateString);
             tv_timestamp.setText(formattedTime);
+            propic_iv.setParseFile(post.getUser().fetchIfNeeded().getParseFile("profilepicture"));
+            propic_iv.loadInBackground();
 
             if (post.getFavcount() > 0) {
                 favcount_tv.setText(String.format("%s",post.getFavcount()));
@@ -99,6 +105,9 @@ public class DetailsActivity extends AppCompatActivity {
                     }
                 }
             }
+        }
+        else {
+            textView.setText("");
         }
 
     }
