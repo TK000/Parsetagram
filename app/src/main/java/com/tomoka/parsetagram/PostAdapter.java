@@ -1,21 +1,26 @@
 package com.tomoka.parsetagram;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseImageView;
 import com.tomoka.parsetagram.model.DetailsActivity;
 import com.tomoka.parsetagram.model.Post;
 
+import org.json.JSONArray;
 import org.parceler.Parcels;
 
 import java.text.Format;
@@ -107,6 +112,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public ParseImageView propic_iv;
         public TextView tv_createdAt;
         public ImageView fav_iv;
+        public ImageView comment_iv;
 
 
         public ViewHolder(View itemView) {
@@ -124,9 +130,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 propic_iv = (ParseImageView) itemView.findViewById(R.id.propic_iv);
                 tv_createdAt = itemView.findViewById(R.id.tvCreatedAt);
                 fav_iv = itemView.findViewById(R.id.fav_iv);
+                comment_iv = itemView.findViewById(R.id.comment_iv);
                 propic_iv.setOnClickListener(this);
                 tvUsername.setOnClickListener(this);
                 fav_iv.setOnClickListener(this);
+                comment_iv.setOnClickListener(this);
             }
         }
 
@@ -139,7 +147,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             // make sure the position is valid, i.e. actually exists in the view
             if (position != RecyclerView.NO_POSITION) {
                 // get the movie at the position, this won't work if the class is static
-                Post post = mPosts.get(position);
+                final Post post = mPosts.get(position);
                 // create intent for the new activity
                 if (v == propic_iv || v == tvUsername) {
                     Intent intent = new Intent(context,GridViewActivity.class);
@@ -155,6 +163,35 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                         post.saveInBackground();
                     }
                     notifyItemChanged(position);
+                } else if (v == comment_iv) {
+                    //TODO
+                    AlertDialog.Builder alert = new AlertDialog.Builder(context);
+
+                    alert.setTitle("Write a comment!");
+                    //alert.setMessage("Message");
+
+                    // Set an EditText view to get user input
+                    final EditText input = new EditText(context);
+                    alert.setView(input);
+
+                    alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            String newcomment = input.getText().toString();
+                            JSONArray commentsarray = post.getJSONArray("comments");
+                            commentsarray.put(newcomment);
+                            post.put("comments",commentsarray);
+                            post.saveInBackground();
+                            // Do something with value!
+                        }
+                    });
+
+                    alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            Toast.makeText(context,"Comment cancelled!",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    alert.show();
                 } else {
                     Intent intent = new Intent(context, DetailsActivity.class);
                     // serialize the movie using parceler, use its short name as a key

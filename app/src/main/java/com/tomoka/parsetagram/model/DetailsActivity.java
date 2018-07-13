@@ -2,7 +2,6 @@ package com.tomoka.parsetagram.model;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.ParseException;
@@ -22,7 +21,6 @@ public class DetailsActivity extends AppCompatActivity {
     ParseImageView ivdProfile;
     TextView favcount_tv;
     TextView tv_timestamp;
-    ImageView comment_iv;
 
     Post post;
     //public PostAdapter postAdapter;
@@ -36,7 +34,6 @@ public class DetailsActivity extends AppCompatActivity {
         tvdBody = findViewById(R.id.tvdBody);
         ivdProfile = findViewById(R.id.ivdProfile);
         favcount_tv = findViewById(R.id.favcount_tv);
-        comment_iv = findViewById(R.id.comment_iv);
         tv_timestamp = findViewById(R.id.tv_timestamp);
 
         post = Parcels.unwrap(getIntent().getParcelableExtra("post"));
