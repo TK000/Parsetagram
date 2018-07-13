@@ -17,6 +17,8 @@ import com.tomoka.parsetagram.model.Post;
 
 import org.parceler.Parcels;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
@@ -34,8 +36,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View tweetView = inflater.inflate(R.layout.item_post, parent, false);
-        ViewHolder viewHolder = new ViewHolder(tweetView);
+        View postView;
+        if (context instanceof GridViewActivity) {
+            postView = inflater.inflate(R.layout.grid_post, parent, false);
+        } else {
+            postView = inflater.inflate(R.layout.item_post, parent, false);
+        }
+        ViewHolder viewHolder = new ViewHolder(postView);
         return viewHolder;
     }
 
@@ -51,13 +58,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.tvBody.setText(post.getDescription());
         holder.ivProfileImage.setParseFile(post.getImage());
         holder.ivProfileImage.loadInBackground();
-        try {
-            holder.propic_iv.setParseFile(post.getUser().fetchIfNeeded().getParseFile("profilepicture"));
-            holder.propic_iv.loadInBackground();
-            Log.d("PROPIC", "SUCCESS!");
-        } catch (ParseException e) {
-            Log.e("PROPIC", "FAIL");
-            e.printStackTrace();
+
+        if (context instanceof fragmentholder) {
+            try {
+                holder.propic_iv.setParseFile(post.getUser().fetchIfNeeded().getParseFile("profilepicture"));
+                holder.propic_iv.loadInBackground();
+                Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                holder.tv_createdAt.setText(formatter.format(post.getCreatedAt()));
+                holder.tvUsername.setText(String.format("%s", post.getUser().fetchIfNeeded().getUsername()));
+                Log.d("PROPIC", "SUCCESS!");
+            } catch (ParseException e) {
+                Log.e("PROPIC", "FAIL");
+                e.printStackTrace();
+            }
         }
 
         //Log.i("TAG", String.format("%s", post.getMedia().getUrl()));
@@ -85,10 +98,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 //        @BindView(R.id.ivReply) public ImageView ivReply;
 
         public TextView tvBody;
-        //public TextView tvUsername;
+        public TextView tvUsername;
         public ParseImageView ivProfileImage;
         public RelativeLayout rLayout;
         public ParseImageView propic_iv;
+        public TextView tv_createdAt;
 
 
         public ViewHolder(View itemView) {
@@ -97,13 +111,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             // perform findViewById lookups
             //ButterKnife.bind(this, itemView);
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
-            //tvUsername = (TextView) itemView.findViewById(R.id.tvUserName);
+            tvUsername = (TextView) itemView.findViewById(R.id.username_iv);
             ivProfileImage = (ParseImageView) itemView.findViewById(R.id.ivProfileImage);
             rLayout = (RelativeLayout) itemView.findViewById(R.id.rLayout);
-            propic_iv = (ParseImageView) itemView.findViewById(R.id.propic_iv);
-
             rLayout.setOnClickListener(this);
-            //ivReply.setOnClickListener(this);
+
+            if (context instanceof fragmentholder) {
+                propic_iv = (ParseImageView) itemView.findViewById(R.id.propic_iv);
+                tv_createdAt = itemView.findViewById(R.id.tvCreatedAt);
+                propic_iv.setOnClickListener(this);
+                tvUsername.setOnClickListener(this);
+            }
         }
 
 
@@ -117,17 +135,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 // get the movie at the position, this won't work if the class is static
                 Post post = mPosts.get(position);
                 // create intent for the new activity
-                Intent intent = new Intent(context, DetailsActivity.class);
-                // serialize the movie using parceler, use its short name as a key
-                intent.putExtra("post", Parcels.wrap(post));
-                //intent.putExtra("pos", position);
-                //intent.putExtra(placeholder, config.getImageUrl(config.getBackdropSize(), movie.getBackdropPath()));
-                // show the activity
-                context.startActivity(intent);
+                if (v == propic_iv || v == tvUsername) {
+                    Intent intent = new Intent(context,GridViewActivity.class);
+                    context.startActivity(intent);
+                } else {
+                    Intent intent = new Intent(context, DetailsActivity.class);
+                    // serialize the movie using parceler, use its short name as a key
+                    intent.putExtra("post", Parcels.wrap(post));
+                    //intent.putExtra("pos", position);
+                    //intent.putExtra(placeholder, config.getImageUrl(config.getBackdropSize(), movie.getBackdropPath()));
+                    // show the activity
+                    context.startActivity(intent);
                 }
             }
-
         }
+
+    }
 
 
     // Clean all elements of the recycler

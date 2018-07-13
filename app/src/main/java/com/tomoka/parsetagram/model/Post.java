@@ -13,6 +13,7 @@ public class Post extends ParseObject {
     private static final String KEY_USER = "user";
     private static final String KEY_FAVCOUNT = "favcount";
     private static final String KEY_PROFILE_PIC = "profilepicture";
+    private static final String KEY_CREATED_AT = "createdAt";
 
     //private static final String KEY_OBJECTID = "objectId";
 
@@ -32,6 +33,7 @@ public class Post extends ParseObject {
         return getUser().getParseFile(KEY_PROFILE_PIC);
     }
 
+    //public Date getCreatedAt() {return getDate(KEY_CREATED_AT);}
 
     public void setImage(ParseFile image) {
         put(KEY_IMAGE, image);

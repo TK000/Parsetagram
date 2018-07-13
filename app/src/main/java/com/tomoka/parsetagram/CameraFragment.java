@@ -120,6 +120,7 @@ public class CameraFragment extends Fragment {
 
     public void onclick(View v) {
         text_et = ((fragmentholder)getActivity()).findViewById(R.id.text_et);
+        ((fragmentholder)getActivity()).showProgressBar();
         createPost(text_et.getText().toString(), photofile, ParseUser.getCurrentUser());
     }
 
@@ -135,7 +136,7 @@ public class CameraFragment extends Fragment {
                 if (e == null) {
                     Log.d("HomeActivity", "Create post success");
                     Toast.makeText(getContext(), "Saved!", Toast.LENGTH_SHORT).show();
-
+                    ((fragmentholder)getActivity()).hideProgressBar();
                 } else {
                     Log.e("HomeActivity", "Create post failed");
                     e.printStackTrace();
