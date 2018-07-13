@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -55,16 +56,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         // populate the views according to this data
 
         //holder.tvUsername.setText(String.format("%s", post.getUser().fetchIfNeeded().getUsername()));
-        holder.tvBody.setText(post.getDescription());
         holder.ivProfileImage.setParseFile(post.getImage());
         holder.ivProfileImage.loadInBackground();
 
         if (context instanceof fragmentholder) {
             try {
+                holder.tvBody.setText(post.getDescription());
                 holder.propic_iv.setParseFile(post.getUser().fetchIfNeeded().getParseFile("profilepicture"));
                 holder.propic_iv.loadInBackground();
-                Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                holder.tv_createdAt.setText(formatter.format(post.getCreatedAt()));
+                Format formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy");
+                String dateString = formatter.format(post.getCreatedAt());
+                String formattedTime = TimeFormatter.getTimeDifference(dateString);
+                holder.tv_createdAt.setText(formattedTime);
                 holder.tvUsername.setText(String.format("%s", post.getUser().fetchIfNeeded().getUsername()));
                 Log.d("PROPIC", "SUCCESS!");
             } catch (ParseException e) {
@@ -103,6 +106,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public RelativeLayout rLayout;
         public ParseImageView propic_iv;
         public TextView tv_createdAt;
+        public ImageView fav_iv;
 
 
         public ViewHolder(View itemView) {
@@ -110,17 +114,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
             // perform findViewById lookups
             //ButterKnife.bind(this, itemView);
-            tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             tvUsername = (TextView) itemView.findViewById(R.id.username_iv);
             ivProfileImage = (ParseImageView) itemView.findViewById(R.id.ivProfileImage);
             rLayout = (RelativeLayout) itemView.findViewById(R.id.rLayout);
             rLayout.setOnClickListener(this);
 
             if (context instanceof fragmentholder) {
+                tvBody = (TextView) itemView.findViewById(R.id.tvBody);
                 propic_iv = (ParseImageView) itemView.findViewById(R.id.propic_iv);
                 tv_createdAt = itemView.findViewById(R.id.tvCreatedAt);
+                fav_iv = itemView.findViewById(R.id.fav_iv);
                 propic_iv.setOnClickListener(this);
                 tvUsername.setOnClickListener(this);
+                fav_iv.setOnClickListener(this);
             }
         }
 
@@ -138,6 +144,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 if (v == propic_iv || v == tvUsername) {
                     Intent intent = new Intent(context,GridViewActivity.class);
                     context.startActivity(intent);
+                } else if (v == fav_iv) {
+                    if (post.getFavcount() > 0) {
+                        final int currentfav = post.getFavcount();
+                        post.setFavcount(currentfav+1);
+                        post.saveInBackground();
+                    }
+                    else {
+                        post.setFavcount(1);
+                        post.saveInBackground();
+                    }
+                    notifyItemChanged(position);
                 } else {
                     Intent intent = new Intent(context, DetailsActivity.class);
                     // serialize the movie using parceler, use its short name as a key

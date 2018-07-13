@@ -7,35 +7,33 @@
 
     <TextView
         android:id="@+id/tvdUser"
-        android:layout_width="match_parent"
+        android:layout_width="285dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/tvdBody"
-        android:layout_below="@+id/ivdProfile"
-        android:layout_marginStart="-64dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:text="TextView"
         tools:layout_editor_absoluteX="3dp"
         tools:layout_editor_absoluteY="4dp" />
 
     <TextView
         android:id="@+id/tvdBody"
-        android:layout_width="257dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/ivdProfile"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-37dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ivdProfile"
         android:autoLink="all"
-        android:linksClickable="true"
         android:gravity="center_horizontal"
+        android:linksClickable="true"
         android:text="TextView" />
 
 
     <com.parse.ParseImageView
         android:id="@+id/ivdProfile"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="37dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvdUser"
+        android:scaleType="centerCrop"
         app:srcCompat="@android:color/black" />
 
     <ImageView
@@ -43,9 +41,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="67dp"
+        android:layout_below="@+id/tvdBody"
+        android:layout_marginStart="122dp"
         app:srcCompat="@mipmap/ic_launcher_round" />
 
     <TextView
@@ -54,4 +51,13 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/fav_iv"
         android:layout_toEndOf="@+id/fav_iv" />
+
+    <TextView
+        android:id="@+id/tv_timestamp"
+        android:layout_width="97dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:gravity="right"
+        android:text="TextView" />
 </RelativeLayout>

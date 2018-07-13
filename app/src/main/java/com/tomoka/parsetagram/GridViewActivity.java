@@ -34,7 +34,7 @@ public class GridViewActivity extends AppCompatActivity {
         postAdapter = new PostAdapter(posts);
         // RecyclerView setup (layout manager, use adapter)
         //LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        rvposts.setLayoutManager(new GridLayoutManager(this, 4));
+        rvposts.setLayoutManager(new GridLayoutManager(this, 3));
         // set the adapter
         rvposts.setAdapter(postAdapter);
         populateTimeline();
