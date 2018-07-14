@@ -21,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity" />
         <activity android:name=".fragmentholder" />
         <activity android:name=".SignupActivity" />
 
@@ -36,8 +35,6 @@
                 android:resource="@xml/fileprovider" />
         </provider>
 
-        <activity android:name=".TimelineActivity" />
-        <activity android:name=".model.DescriptionActivity" />
         <activity android:name=".model.DetailsActivity" />
         <activity android:name=".GridViewActivity"></activity>
     </application>
