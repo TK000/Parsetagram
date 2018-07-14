@@ -153,6 +153,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 // create intent for the new activity
                 if (v == propic_iv || v == tvUsername) {
                     Intent intent = new Intent(context,GridViewActivity.class);
+                    intent.putExtra("post",Parcels.wrap(post));
                     context.startActivity(intent);
                 } else if (v == fav_iv) {
                     if (post.getFavcount() > 0) {
