@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-import com.parse.ParseUser;
 import com.tomoka.parsetagram.model.Post;
 
 import java.util.ArrayList;
@@ -86,7 +85,7 @@ public class TimelineFragment extends Fragment {
         // Define the class we would like to query
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         // Define our query conditions
-        query.whereEqualTo("user", ParseUser.getCurrentUser());
+        //query.whereEqualTo("user", ParseUser.getCurrentUser());
         final int pos = offset*20;
         // Execute the find asynchronously
         query.findInBackground(new FindCallback<Post>() {
