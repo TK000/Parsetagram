@@ -1,6 +1,8 @@
 package com.tomoka.parsetagram;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +36,7 @@ public class CameraFragment extends Fragment {
     File photoFile;
 
     TextView text_et;
+    ImageView imageView;
     Button description_btn;
 
     // The onCreateView method is called when Fragment should create its View object hierarchy,
@@ -48,11 +52,14 @@ public class CameraFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         description_btn = view.findViewById(R.id.description_btn);
+        text_et = view.findViewById(R.id.text_et);
+        imageView = view.findViewById(R.id.imageView);
+        text_et.setText("");
 
         description_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                text_et = ((fragmentholder)getActivity()).findViewById(R.id.text_et);
+                //text_et = ((fragmentholder)getActivity()).findViewById(R.id.text_et);
                 createPost(text_et.getText().toString(), photofile, ParseUser.getCurrentUser());
             }
         });
@@ -111,6 +118,10 @@ public class CameraFragment extends Fragment {
                 //i.putExtra("photofile", photoFile.getAbsolutePath());
                 //startActivity(i);
                 photofile = new ParseFile(photoFile);
+                Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                // RESIZE BITMAP, see section below
+                // Load the taken image into a preview
+                imageView.setImageBitmap(takenImage);
 
             } else { // Result was a failure
                 Toast.makeText(getContext(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
@@ -137,6 +148,9 @@ public class CameraFragment extends Fragment {
                     Log.d("HomeActivity", "Create post success");
                     Toast.makeText(getContext(), "Saved!", Toast.LENGTH_SHORT).show();
                     ((fragmentholder)getActivity()).hideProgressBar();
+                    text_et.setVisibility(View.INVISIBLE);
+                    description_btn.setVisibility(View.INVISIBLE);
+                    imageView.setVisibility(View.INVISIBLE);
                 } else {
                     Log.e("HomeActivity", "Create post failed");
                     e.printStackTrace();

@@ -152,7 +152,7 @@ public class TimelineFragment extends Fragment {
         // Define the class we would like to query
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         // Define our query conditions
-        query.whereEqualTo("user", ParseUser.getCurrentUser());
+        //query.whereEqualTo("user", ParseUser.getCurrentUser());
         // Execute the find asynchronously
         query.findInBackground(new FindCallback<Post>() {
             @Override
