@@ -88,7 +88,7 @@ public class TimelineFragment extends Fragment {
         //query.whereEqualTo("user", ParseUser.getCurrentUser());
         final int pos = offset*20;
         // Execute the find asynchronously
-        query.findInBackground(new FindCallback<Post>() {
+        query.orderByAscending("createdAt").findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> itemList, ParseException e) {
                 if (e == null) {
@@ -119,7 +119,7 @@ public class TimelineFragment extends Fragment {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         // Define our query conditions
         // Execute the find asynchronously
-        query.findInBackground(new FindCallback<Post>() {
+        query.orderByAscending("createdAt").findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> itemList, ParseException e) {
                 if (e == null) {
@@ -153,7 +153,7 @@ public class TimelineFragment extends Fragment {
         // Define our query conditions
         //query.whereEqualTo("user", ParseUser.getCurrentUser());
         // Execute the find asynchronously
-        query.findInBackground(new FindCallback<Post>() {
+        query.orderByAscending("createdAt").findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> itemList, ParseException e) {
                 if (e == null) {
