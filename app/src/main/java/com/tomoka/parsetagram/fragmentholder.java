@@ -72,6 +72,7 @@ public class fragmentholder extends AppCompatActivity {
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.action_favorites:
+                                showProgressBar();
                                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                 fragmentTransaction.replace(R.id.flContainer, fragment1).commit();
                                 return true;
